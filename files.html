@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Portal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#f3f5fa;color:#27324a}
+.sidebar{
+ position:fixed;width:250px;height:100vh;background:#172554;
+ color:white;padding:25px 18px;
+}
+.logo{font-size:23px;font-weight:bold;margin-bottom:40px}
+.sidebar a{
+ display:block;color:#cbd5e1;text-decoration:none;
+ padding:14px;margin:8px 0;border-radius:8px;cursor:pointer
+}
+.sidebar a:hover,.sidebar a.active{background:#334e9a;color:white}
+.main{margin-left:250px;padding:30px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}
+header h1{font-size:27px}
+.profile{background:white;padding:12px 18px;border-radius:10px}
+.welcome{
+ background:linear-gradient(120deg,#1e3a8a,#496bd1);
+ color:white;padding:30px;border-radius:15px;margin-bottom:25px
+}
+.welcome h2{font-size:26px;margin-bottom:10px}
+.stats{
+ display:grid;grid-template-columns:repeat(4,1fr);
+ gap:18px;margin-bottom:25px
+}
+.card{background:white;padding:22px;border-radius:12px;box-shadow:0 2px 10px #00000008}
+.card h3{font-size:14px;color:#64748b;margin-bottom:12px}
+.card h2{font-size:28px;color:#1e3a8a}
+.content{display:grid;grid-template-columns:2fr 1fr;gap:20px}
+.subject{margin:20px 0}
+.progress{height:9px;background:#e2e8f0;border-radius:10px;margin-top:10px}
+.bar{height:9px;background:#4361c2;border-radius:10px}
+table{width:100%;border-collapse:collapse;margin-top:15px}
+th,td{text-align:left;padding:13px;border-bottom:1px solid #eee;font-size:14px}
+th{color:#64748b}
+button{background:#3155a5;color:white;border:0;padding:10px 15px;border-radius:7px;cursor:pointer}
+button:hover{background:#1e3a8a}
+.page{display:none}
+.page.active{display:block}
+input{padding:10px;border:1px solid #ddd;border-radius:7px;margin:8px 0;width:100%}
+@media(max-width:900px){
+ .sidebar{width:190px}
+ .main{margin-left:190px}
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .content{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+ .sidebar{position:relative;width:100%;height:auto;padding:12px}
+ .logo{margin-bottom:10px}
+ .sidebar a{display:inline-block;padding:9px;margin:3px;font-size:12px}
+ .main{margin:0;padding:15px}
+ .stats{grid-template-columns:1fr 1fr}
+ header h1{font-size:20px}
+}
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+ <div class="logo">🎓 Student Portal</div>
+ <a class="active" onclick="showPage('dashboard',this)">🏠 Dashboard</a>
+ <a onclick="showPage('profile',this)">👤 My Profile</a>
+ <a onclick="showPage('subjects',this)">📚 My Subjects</a>
+ <a onclick="showPage('assignments',this)">📝 Assignments</a>
+ <a onclick="showPage('schedule',this)">📅 Class Schedule</a>
+ <a onclick="showPage('grades',this)">📊 My Grades</a>
+ <a onclick="logout()">🚪 Logout</a>
+</aside>
+
+<main class="main">
+<header>
+ <h1 id="pageTitle">Dashboard</h1>
+ <div class="profile">👤 <span id="headerName">Alex Morgan</span></div>
+</header>
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="page active">
+ <div class="welcome">
+  <h2>Welcome back, <span id="welcomeName">Abrasaldo, kenneth J.</span>!</h2>
+  <p>Welcome to your Student Information Portal.</p>
+  <p style="margin-top:12px">Academic Year: 2026-2027</p>
+ </div>
+
+ <div class="stats">
+  <div class="card"><h3>Enrolled Subjects</h3><h2>6</h2></div>
+  <div class="card"><h3>Assignments</h3><h2>8</h2></div>
+  <div class="card"><h3>Average Grade</h3><h2>92%</h2></div>
+  <div class="card"><h3>Attendance</h3><h2>96%</h2></div>
+ </div>
+
+ <div class="content">
+  <div class="card">
+   <h3>My Subjects</h3>
+   <div class="subject">Mathematics <span style="float:right">85%</span><div class="progress"><div class="bar" style="width:85%"></div></div></div>
+   <div class="subject">Science <span style="float:right">75%</span><div class="progress"><div class="bar" style="width:75%"></div></div></div>
+   <div class="subject">English <span style="float:right">90%</span><div class="progress"><div class="bar" style="width:90%"></div></div></div>
+   <div class="subject">Computer Studies <span style="float:right">65%</span><div class="progress"><div class="bar" style="width:65%"></div></div></div>
+  </div>
+  <div class="card">
+   <h3>Upcoming Activities</h3>
+   <p style="margin:18px 0">📘 Mathematics Assignment<br><small>November 19, 2026</small></p>
+   <p style="margin:18px 0">🔬 Science Project<br><small>November 21, 2026</small></p>
+   <p style="margin:18px 0">📝 English Essay<br><small>November 23, 2026</small></p>
+  </div>
+ </div>
+</section>
+
+<!-- PROFILE -->
+<section id="profile" class="page">
+ <div class="card">
+  <h3>Student Information</h3>
+  <label>Full Name</label><input id="studentName" value="Abrasaldo, kenneth j">
+  <label>Student ID</label><input value="270361" readonly>
+  <label>Email</label><input value="kenneth@email.com">
+  <label>Course / Strand</label><input value="BS Information Systems">
+  <label>Year Level</label><input value="1st Year">
+  <label>Contact Number</label><input value="09123456789">
+  <button onclick="saveProfile()">Save Changes</button>
+ </div>
+</section>
+
+<!-- SUBJECTS -->
+<section id="subjects" class="page">
+ <div class="card">
+  <h3>Enrolled Subjects</h3>
+  <table>
+   <tr><th>Code</th><th>Subject</th><th>Instructor</th></tr>
+   <tr><td>MATH101</td><td>Mathematics</td><td>Mr. Anderson</td></tr>
+   <tr><td>SCI102</td><td>Science</td><td>Ms. Williams</td></tr>
+   <tr><td>ENG103</td><td>English</td><td>Mrs. Davis</td></tr>
+   <tr><td>CS104</td><td>Computer Studies</td><td>Mr. Johnson</td></tr>
+   <tr><td>PE105</td><td>Physical Education</td><td>Mr. Smith</td></tr>
+   <tr><td>HIS106</td><td>History</td><td>Ms. Garcia</td></tr>
+  </table>
+ </div>
+</section>
+
+<!-- ASSIGNMENTS -->
+<section id="assignments" class="page">
+ <div class="card">
+  <h3>Assignments</h3>
+  <table>
+   <tr><th>Assignment</th><th>Due Date</th><th>Status</th><th>Action</th></tr>
+   <tr><td>Math Activity</td><td>Nov 19</td><td>Pending</td><td><button onclick="complete(this)">Submit</button></td></tr>
+   <tr><td>Science Project</td><td>Nov 21</td><td>Pending</td><td><button onclick="complete(this)">Submit</button></td></tr>
+   <tr><td>English Essay</td><td>Nov 23</td><td>Pending</td><td><button onclick="complete(this)">Submit</button></td></tr>
+  </table>
+ </div>
+</section>
+
+<!-- SCHEDULE -->
+<section id="schedule" class="page">
+ <div class="card">
+  <h3>Class Schedule</h3>
+  <table>
+   <tr><th>Day</th><th>Time</th><th>Subject</th></tr>
+   <tr><td>Monday</td><td>8:00 - 10:00 AM</td><td>Mathematics</td></tr>
+   <tr><td>Tuesday</td><td>9:00 - 11:00 AM</td><td>Science</td></tr>
+   <tr><td>Wednesday</td><td>8:00 - 10:00 AM</td><td>English</td></tr>
+   <tr><td>Thursday</td><td>1:00 - 3:00 PM</td><td>Computer Studies</td></tr>
+   <tr><td>Friday</td><td>8:00 - 10:00 AM</td><td>Physical Education</td></tr>
+  </table>
+ </div>
+</section>
+
+<!-- GRADES -->
+<section id="grades" class="page">
+ <div class="card">
+  <h3>Academic Grades</h3>
+  <table>
+   <tr><th>Subject</th><th>Grade</th><th>Remarks</th></tr>
+   <tr><td>Mathematics</td><td>90</td><td>Passed</td></tr>
+   <tr><td>Science</td><td>92</td><td>Passed</td></tr>
+   <tr><td>English</td><td>95</td><td>Passed</td></tr>
+   <tr><td>Computer Studies</td><td>93</td><td>Passed</td></tr>
+   <tr><td>History</td><td>90</td><td>Passed</td></tr>
+  </table>
+ </div>
+</section>
+</main>
+
+<script>
+function showPage(id,element){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ document.querySelectorAll('.sidebar a').forEach(a=>a.classList.remove('active'));
+ element.classList.add('active');
+ document.getElementById('pageTitle').textContent =
+ element.textContent.replace(/[^\w\s]/g,'').trim();
+}
+
+function saveProfile(){
+ let name=document.getElementById('studentName').value.trim();
+ if(!name){alert('Please enter your name.');return;}
+ document.getElementById('headerName').textContent=name;
+ document.getElementById('welcomeName').textContent=name;
+ alert('Profile updated successfully!');
+}
+
+function complete(button){
+ button.parentElement.previousElementSibling.textContent='Submitted';
+ button.disabled=true;
+ button.textContent='Done';
+ button.style.background='#15966b';
+}
+
+function logout(){
+ if(confirm('Are you sure you want to logout?')){
+  alert('You have been logged out.');
+  location.reload();
+ }
+}
+</script>
+</body>
+</html>
